@@ -7,6 +7,7 @@ use App\Prakerlap;
 use App\Dudi;
 use App\Praktikan;
 use App\Guru;
+use App\Mutasi;
 class PrakerlapController extends Controller
 {
     /**
@@ -192,24 +193,24 @@ class PrakerlapController extends Controller
 
 
 
-    public function update(Request $request)
+    public function mutasi(Request $request)
     {
-        $id = $request->id;
-        $Prakerlap = Prakerlap::find($id);
+        $id = $request->input('kode_pkl');
+        $mutasi = Prakerlap::where('kode_pkl', $id)
+                    ->update(['_dudi' => $request->input('_dudi'), '_guru'=>$request->input('_guru'), 'mutasi' => 'iya']);
 
-        $Prakerlap->kode_Prakerlap = $request->kode_Prakerlap;
-        $Prakerlap->nama_Prakerlap = $request->nama_Prakerlap;
-        $Prakerlap->alamat = $request->alamat;
-        $Prakerlap->kota = $request->kota;
-        $Prakerlap->pemilik = $request->pemilik;
-        $Prakerlap->telp = $request->telp;
-        $Prakerlap->email = $request->email;
-        $Prakerlap->kuota = $request->kuota;
+        
 
-        $update = $Prakerlap->save();
-
-        if ( $update ) {
-            return response()->json(["success" => true, "msg" => "Data Prakerlap berhasil diperbarui"], 201);
+        if ( $mutasi ) {
+            $catat_mutasi = Mutasi::create([
+                'kode_pkl' => $request->input('kode_pkl'),
+                '_siswa' => $request->input('nis'),
+                '_dudi_lama' => $request->input('_dudi_asal'),
+                '_dudi_baru' => $request->input('_dudi'),
+                '_guru' => $request->input('_guru'),
+                'ket' => $request->input('ket')
+            ]);
+            return response()->json(["success" => true, "msg" => "Praktikan", "data" => $catat_mutasi], 201);
         } else {
             return response()->json(["success" => false, "msg"=>"Pembaruan data Prakerlap gagal"]);
         }
@@ -220,36 +221,43 @@ class PrakerlapController extends Controller
         $datas = $request->all();
         $jml = count($datas);
         $i = 0;
+        // return response()->json(['data' => $datas], 200);
+        $items = [];
 
         while($i < $jml) {
-            $cek = Prakerlap::where(['_siswa' => $datas[$i]['_siswa']])->count();
+            // $cek = Prakerlap::where(['_siswa' => $datas[$i]['_siswa']])->count();
 
-            if ($cek > 0) {
-                return response()->json(['success' => false, 'msg' => 'Praktikan sudah terdaftar dalam basis data. Mohon konfirmasi ke Super Admin', 'data' => $cek.'-'.$datas[$i]['_siswa']]);
-            } else {
+            // if ($cek > 0) {
+            //     return response()->json(['success' => false, 'msg' => 'Praktikan sudah terdaftar dalam basis data. Mohon konfirmasi ke Super Admin', 'data' => $cek.'-'.$datas[$i]['_siswa']]);
+            // } else {
 
 
                 $save = Prakerlap::create([
-                    'kode_pkl' =>  $datas [$i]['kode_pkl'],
-                    'mutasi' =>  $datas [$i]['mutasi'],
-                    'periode' =>  $datas [$i]['periode'],
-                    'status' =>  $datas [$i]['status'],
-                    '_dudi' =>  $datas [$i]['_dudi'],
-                    '_guru' =>  $datas [$i]['_guru'],
-                    '_siswa' =>  $datas [$i]['_siswa']
+                    'kode_pkl' =>  $datas[$i]['kode_pkl'],
+                    'mutasi' =>  $datas[$i]['mutasi'],
+                    'periode' =>  $datas[$i]['periode'],
+                    'status' =>  $datas[$i]['status'],
+                    '_dudi' =>  $datas[$i]['_dudi'],
+                    '_guru' =>  $datas[$i]['_guru'],
+                    '_siswa' =>  $datas[$i]['_siswa']
                 ], 400);
 
                 $praktikan = Praktikan::where('nis', $datas[$i]['_siswa'])
                                     ->update(['isActive' => '1']);
                 
                 $i++;
-            }
 
-            if ($save) {
+                array_push($items, $save);
+            // }
+
+        }
+            if ($items) {
+
+                $jmltersimpan= count($items);
                 return response()->json([
                     'success' => true,
-                    'msg' => 'Calon Praktikan telah terdaftar dan status diaktifkan.',
-                    'data' => $save
+                    'msg' => 'Calon Praktikan telah terdaftar dan status diaktifkan sejumlah : '.$jmltersimpan,
+                    'data' => $items
                 ], 201);
             } else {
                 return response()->json([
@@ -259,8 +267,8 @@ class PrakerlapController extends Controller
                 ], 401);
             }
 
-        }
+        // }
 
-        return response()->json(['msg' => $datas]);
+        // return response()->json(['msg' => $datas]);
     }
 }

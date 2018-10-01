@@ -19,7 +19,7 @@ class Nilai extends Model implements AuthenticatableContract, AuthorizableContra
      */
 
     protected $fillable = [
-       'kode_nilai', '_siswa', '_dudi', 'periode', 'nilais', 'nt1', 'nt2', 'nt3', 'nt4', 'nt5', 'nt6', 'nt7', 'nt8', 't1', 't2', 't3', 't4', 't5', 't6', 't7', 't8', 't9', 't10' 
+       'kode_nilai', '_siswa', '_dudi', 'periode', 'nilais'
     ];
 
     /**

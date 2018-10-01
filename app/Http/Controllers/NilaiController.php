@@ -136,4 +136,47 @@ class NilaiController extends Controller
             return response()->json(['success' =>  false, 'msg' => 'Data penilaian, gagal dihapus'], 204);
         }
     }
+
+    public function import(Request $request)
+    {
+        $datas = $request->all();
+        $jml = count($datas);
+        $i=0;
+        $items= [];
+        $th = date('Y');
+
+        while($i < $jml) {
+            $kode_nilai = $th.$datas[$i]['periode'].$datas[$i]['_siswa'];
+            // $nilais = str_replace(['"', '[', ']'],'',$datas[$i]['nilais']);
+            $array_nilai = (explode(",", $datas[$i]['nilais']));
+            $nilai = [];
+            for($a=0;$a<count($array_nilai);$a++){
+                array_push($nilai, $array_nilai[$a]);
+            }
+            
+            $import = Nilai::create([
+                'kode_nilai' => $kode_nilai,
+                '_siswa' => $datas[$i]['_siswa'],
+                '_dudi' => $datas[$i]['_dudi'],
+                'nilais' => serialize($nilai),
+                'periode' => $datas[$i]['periode'],
+            ]);
+
+            $prakerlap = Prakerlap::where('_siswa', $datas[$i]['_siswa'])
+                                    ->update(['scored' => '1']);
+
+            array_push($items, $nilai);
+
+            $i++;
+        }
+
+        if ($items){
+            return response()->json(["success" => true, "msg" => "Import Berhasil", "data" => $items], 202);
+        } else {
+            return response()->json(["success" => false, "msg" => "Import gagal", "data" => ""], 402);
+        }
+
+        
+        
+    }
 }

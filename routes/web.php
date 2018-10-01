@@ -56,6 +56,7 @@ $router->get('/api/lastpkl', 'PrakerlapController@getLast');
 $router->get('/api/jmlterdaftar', 'PrakerlapController@countRegd');
 $router->get('/api/regSiswas', 'PrakerlapController@regdSiswa');
 $router->get('/api/notscored', 'PrakerlapController@notScored');
+$router->put('/api/prakerlap', 'PrakerlapController@mutasi');
 
 $router->post('/api/newpkl', 'PrakerlapController@regNew');
 
@@ -66,6 +67,7 @@ $router->get('/api/scored', 'NilaiController@scored');
 $router->put('/api/nilai/{nis}', 'NilaiController@updNilai');
 $router->delete('/api/nilai/{kode_nilai', 'NilaiController@deleteOne');
 $router->get('/api/lastsert', 'SertifikatController@getLast');
+$router->post('/api/importnilais', 'NilaiController@import');
 
 // Route Umum
 $router->post('/periode', 'PeriodeController@addNew');

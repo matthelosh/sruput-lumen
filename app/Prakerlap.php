@@ -19,7 +19,7 @@ class Prakerlap extends Model implements AuthenticatableContract, AuthorizableCo
      */
 
     protected $fillable = [
-       'kode_pkl', '_siswa', '_guru', 'periode', 'status', 'mutasi', 'scored'
+       'kode_pkl', '_siswa', '_guru', '_dudi', 'periode', 'status', 'mutasi', 'scored'
     ];
 
     /**

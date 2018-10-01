@@ -15,6 +15,7 @@ return array(
     'CreateDudisTable' => $baseDir . '/database/migrations/2018_09_26_105101_create_dudis_table.php',
     'CreateGurusTable' => $baseDir . '/database/migrations/2018_09_23_185144_create_gurus_table.php',
     'CreateMenusTable' => $baseDir . '/database/migrations/2018_09_23_203435_create_menus_table.php',
+    'CreateMutasisTable' => $baseDir . '/database/migrations/2018_10_01_115016_create_mutasis_table.php',
     'CreateNilaisTable' => $baseDir . '/database/migrations/2018_09_29_083655_create_nilais_table.php',
     'CreatePeriodesTbl' => $baseDir . '/database/migrations/2018_09_23_133103_create_periodes_tbl.php',
     'CreatePrakerlapsTable' => $baseDir . '/database/migrations/2018_09_27_225037_create_prakerlaps_table.php',

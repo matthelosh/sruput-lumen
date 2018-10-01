@@ -334,6 +334,7 @@ class ComposerStaticInitf90e72a74f472b57650490a338394ffb
         'CreateDudisTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_26_105101_create_dudis_table.php',
         'CreateGurusTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_23_185144_create_gurus_table.php',
         'CreateMenusTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_23_203435_create_menus_table.php',
+        'CreateMutasisTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_01_115016_create_mutasis_table.php',
         'CreateNilaisTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_29_083655_create_nilais_table.php',
         'CreatePeriodesTbl' => __DIR__ . '/../..' . '/database/migrations/2018_09_23_133103_create_periodes_tbl.php',
         'CreatePrakerlapsTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_27_225037_create_prakerlaps_table.php',
