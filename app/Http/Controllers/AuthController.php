@@ -44,7 +44,7 @@ class AuthController extends Controller
                 'hp_ortu' => $request->input('hp_ortu'),
                 'alamat' => $request->input('alamat'),
                 '_role' => '3',
-                'isActive' => '1'
+                'isActive' => '0'
             ]);
         } else {
             $register = Guru::create([
@@ -91,8 +91,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $uname = $request->input('uname');
-        // $email = $request->input('email');
         $password = $request->input('password');
+        $periode = $request->input('periode');
 
         // $Schema;\
         $keyLogin = $uname[0];
@@ -101,8 +101,9 @@ class AuthController extends Controller
             
             $user = User::where('uname', $uname)->first();
             
-        } else if ($keyLogin === 'u') {
-            $user = Praktikan::where('uname', $uname)->first();
+        // } else if ($keyLogin === 'u') {
+        } else if (preg_match("/^[0-9]+$/", $keyLogin) == 1) {
+            $user = Praktikan::where('uname', $uname)->where('periode', $periode)->first();
         } else {
             $user = Guru::where('uname', $uname)->first();
         }

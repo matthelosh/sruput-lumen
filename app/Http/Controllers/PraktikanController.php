@@ -60,6 +60,25 @@ class PraktikanController extends Controller
         }
     }
 
+    public function regOne (Request $request)
+    {
+        $data = $request->all();
+        // $reg = Praktikan::create([
+        //        'uname' => $data, 
+        //         'password' => Hash::make($datas[$i]['password']),
+        //         'nis' => $datas[$i]['nis'],
+        //         'nama' => $datas[$i]['nama'], 
+        //         'kelas' => $datas[$i]['kelas'], 
+        //         'periode' => $datas[$i]['periode'], 
+        //         'hp' => $datas[$i]['hp'], 
+        //         'hp_ortu' => $datas[$i]['hp_ortu'], 
+        //         'alamat' => $datas[$i]['alamat'], 
+        //         '_role' => $datas[$i]['_role'], 
+        //         'isActive' => $datas[$i]['isActive']
+        // ])
+        return response()->json(['msg'=>$data]);
+    }
+
     public function getSiswas (Request $request)
     {
         $periode = $request->periode;
@@ -162,4 +181,6 @@ class PraktikanController extends Controller
                 ], 404);
             }
         }
+
+    
 }

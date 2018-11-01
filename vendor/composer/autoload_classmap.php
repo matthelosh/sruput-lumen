@@ -21,6 +21,7 @@ return array(
     'CreatePrakerlapsTable' => $baseDir . '/database/migrations/2018_09_27_225037_create_prakerlaps_table.php',
     'CreatePraktikansTable' => $baseDir . '/database/migrations/2018_09_23_182813_create_praktikans-table.php',
     'CreateSertifikatsTable' => $baseDir . '/database/migrations/2018_09_30_200357_create_sertifikats_table.php',
+    'CreateSyaratsTable' => $baseDir . '/database/migrations/2018_10_14_112032_create_syarats_table.php',
     'CreateTableJadwals' => $baseDir . '/database/migrations/2018_09_24_181307_create_table_jadwals.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2018_09_22_213016_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

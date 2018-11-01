@@ -79,25 +79,6 @@ class PrakerlapController extends Controller
             ], 404);
         }
     }
-    // public function countRegd(Request $request)
-    // {
-    //     $periode = $request->periode;
-    //     $Regd = Prakerlap::where('periode', $periode)->get();
-    //     $jml = count($Regd);
-    //     if ( $Regd ) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'msg' => 'Jumlah terdaftar periode '.$periode,
-    //             'data' => $jml
-    //         ], 200);
-    //     } else {
-    //         return response()->json([
-    //             'success' => false,
-    //             'msg' => 'Jumlah terdaftar periode '.$periode.' masih kosong',
-    //             'data' => ''
-    //         ], 404);
-    //     }
-    // }
 
     public function regdSiswa (Request $request)
     {
@@ -156,14 +137,15 @@ class PrakerlapController extends Controller
     //         }
     //     }
 
-    public function delete(Request $request, $id)
+    public function delOne(Request $request, $id, $_siswa)
     {
-        $remove = Prakerlap::where('id', $id)->delete();
+        $remove = Prakerlap::where('_id', $id)->delete();
 
         if ($remove) {
+            $deactivate = Praktikan::where('nis', $_siswa)->update(['isActive'=>'0']);
             return response()->json([
                 'success' => true,
-                'msg' => 'Prakerlap berhasil dihapus',
+                'msg' => 'Data Penempatan berhasil dihapus',
                 'data' => $remove
             ], 201);
         } else {
@@ -270,5 +252,33 @@ class PrakerlapController extends Controller
         // }
 
         // return response()->json(['msg' => $datas]);
+    }
+
+    public function getMyPkl(Request $request)
+    {
+        $periode = $request->periode;
+        $kode_guru = $request->id;
+
+        $pkl = Prakerlap::where('prakerlaps.periode', $periode)
+                     ->where('prakerlaps._guru', $kode_guru)
+                     ->select('prakerlaps.*', 'praktikans.*', 'gurus.*', 'dudis.*')
+                     ->join('praktikans', 'prakerlaps._siswa', '=', 'praktikans.nis')
+                     ->join('gurus', 'prakerlaps._guru', '=', 'gurus.kode_guru')
+                     ->join('dudis', 'prakerlaps._dudi', '=', 'dudis.kode_dudi')
+                     ->get();
+
+        if ($pkl){
+            return response()->json([
+                'success' => true,
+                'msg' => 'Data Prakerlap Saya: '.$kode_guru,
+                'data' => $pkl
+            ], 200);
+        } else {
+             return response()->json([
+                'success' => false,
+                'msg' => 'Data Prakerlap Saya: '.$id,
+                'data' => $pkl
+            ], 404);
+        }
     }
 }

@@ -24,7 +24,6 @@ class PeriodeController extends Controller
         $selesai = $request->input('selesai');
 
         $add = Periode::create([
-            'id'=>$id,
             'kode'=>$kode,
             'periode'=>$periode,
             'mulai'=>$mulai,

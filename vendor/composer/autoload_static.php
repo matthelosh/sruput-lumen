@@ -340,6 +340,7 @@ class ComposerStaticInitf90e72a74f472b57650490a338394ffb
         'CreatePrakerlapsTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_27_225037_create_prakerlaps_table.php',
         'CreatePraktikansTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_23_182813_create_praktikans-table.php',
         'CreateSertifikatsTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_30_200357_create_sertifikats_table.php',
+        'CreateSyaratsTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_14_112032_create_syarats_table.php',
         'CreateTableJadwals' => __DIR__ . '/../..' . '/database/migrations/2018_09_24_181307_create_table_jadwals.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_22_213016_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',

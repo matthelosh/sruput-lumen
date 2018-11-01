@@ -124,13 +124,13 @@ class NilaiController extends Controller
         }
     }
 
-    public function deleteOne(Request $request, $kode_nilai)
+    public function deleteOne(Request $request)
     {
-        $hapus = Nilai::where('kode_nilai', $kode_nilai)->delete();
+        $hapus = Nilai::where('kode_nilai', $request->kode)->delete();
 
         if ( $hapus ) {
-            $prakerlap = Prakerlap::where('_siswa', $request->input('nis'))
-                        ->update(["scored" => '0']);
+            // $prakerlap = Prakerlap::where('_siswa', $request->nis)
+                        // ->update(["scored" => '0']);
             return response()->json(['success' => true, 'msg'=>'Data Penilaian telah terhapus'], 202);
         } else {
             return response()->json(['success' =>  false, 'msg' => 'Data penilaian, gagal dihapus'], 204);
