@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Praktikan;
+use App\Syarat;
 class PraktikanController extends Controller
 {
     /**

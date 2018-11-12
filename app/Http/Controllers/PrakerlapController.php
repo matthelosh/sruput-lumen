@@ -8,6 +8,8 @@ use App\Dudi;
 use App\Praktikan;
 use App\Guru;
 use App\Mutasi;
+use App\Syarat;
+use app\Pembinaan;
 class PrakerlapController extends Controller
 {
     /**
@@ -281,4 +283,26 @@ class PrakerlapController extends Controller
             ], 404);
         }
     }
+
+    public function getMySyarat(Request $request)
+    {
+        $syarats = Syarat::where('_siswa', $request->user)->get();
+        if ( $syarats ) {
+            return response()->json([
+                'success' => true,
+                'msg' => 'Syarat Ku',
+                'data' => $syarats
+            ], 200);
+        } else {
+             return response()->json([
+                'success' => false,
+                'msg' => 'Syarat Ku Zonk',
+                'data' => $user
+            ], 404);
+        }
+
+        // return response()->json(['msg' => $request->user]);
+    }
+
+    
 }

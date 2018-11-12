@@ -53,7 +53,9 @@ $router->get('/api/getlastdudi', 'DudiController@getLast');
 $router->delete('/api/dudi/{id}', 'DudiController@delete');
 $router->put('/api/dudi', 'DudiController@update');
 
-
+// Route user praktikan 
+// $router->get('/api/mysyarat', 'PrakerlapController@getMySyarat');
+$router->get('/api/syarat', 'PrakerlapController@getMySyarat');
 // Route Penepmatan Prakerlap
 $router->get('/api/lastpkl', 'PrakerlapController@getLast');
 $router->get('/api/jmlterdaftar', 'PrakerlapController@countRegd');
@@ -81,6 +83,7 @@ $router->get('/api/admcalons', 'PraprakerlapController@getSyarats');
 $router->put('/api/updSyarat', 'PraprakerlapController@updSyarat');
 $router->get('/api/pembinaan', 'PraprakerlapController@getPembinaan');
 $router->post('/api/pembinaan', 'PraprakerlapController@addPembinaan');
+$router->delete('/api/pembinaan', 'PraprakerlapController@delPembinaan');
 
 // Route Umum
 $router->get('/umum/kelas', 'UmumController@getKelases');

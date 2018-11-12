@@ -51,7 +51,7 @@ class AuthController extends Controller
                 'kode_guru' => $request->input('kode_guru'),
                 'uname' => $uname,
                 'password' => $password,
-                'nama' => $request->input('nama'),
+                'name' => $request->input('name'),
                 'alamat' => $request->input('alamat'),
                 'hp' => $request->input('hp'),
                 '_role' => '2',
